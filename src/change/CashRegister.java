@@ -1,18 +1,29 @@
 package change;
 
+import java.util.Scanner;
+
 public class CashRegister {
 	public static void main(String[] args) {
+		Scanner keyboard = new Scanner(System.in);
+		float price = 0.0F;
+		float moneyTendered = 0.0F;
+		int dollars = 0;
+		int cents = 0;
+		
 		
 	}
 	
 	// The user is prompted asking for the price of the item.
-	static double promptPrice() {
-		return 0;
+	static float promptPrice(Scanner sc) {
+		float userPrice = 0.0F;
+		System.out.println("Enter the price of the item: ");
+		userPrice = sc.nextFloat();
+		return userPrice;
 	}
 	
 	//The user is prompted asking how much 
 	// money was tendered by the customer.
-	static double promptMoneyTendered() {
+	static float promptMoneyTendered(Scanner sc) {
 		return 0;
 	}
 	
