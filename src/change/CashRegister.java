@@ -12,8 +12,9 @@ public class CashRegister {
 		
 		price = promptPrice(keyboard);
 		moneyTendered = promptMoneyTendered(keyboard);
-		
-		System.out.println(price + " " + moneyTendered);
+		if (validAmount(price, moneyTendered)) {
+			
+		}
 	}
 	
 	// The user is prompted asking for the price of the item.
@@ -35,8 +36,17 @@ public class CashRegister {
 	
 	// Display an appropriate message if the customer provided 
 	// too little money or the exact amount.
-	static boolean validAmount() {
-		return false;
+	static boolean validAmount(float price, float given) {
+		float diff = given - price;
+		if (diff == 0.0F) {
+			System.out.println("Exact change given. No change needed.");
+			return false;
+		} else if (diff < 0) {
+			System.out.println("Not enough money given. Ask customer for more money.");
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 }
