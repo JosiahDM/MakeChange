@@ -10,7 +10,10 @@ public class CashRegister {
 		int dollars = 0;
 		int cents = 0;
 		
+		price = promptPrice(keyboard);
+		moneyTendered = promptMoneyTendered(keyboard);
 		
+		System.out.println(price + " " + moneyTendered);
 	}
 	
 	// The user is prompted asking for the price of the item.
@@ -24,7 +27,10 @@ public class CashRegister {
 	//The user is prompted asking how much 
 	// money was tendered by the customer.
 	static float promptMoneyTendered(Scanner sc) {
-		return 0;
+		float tendered = 0.0F;
+		System.out.println("Enter the money tendered in decimal form (ex 10.25):");
+		tendered = sc.nextFloat();
+		return tendered;
 	}
 	
 	// Display an appropriate message if the customer provided 
