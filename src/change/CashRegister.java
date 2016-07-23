@@ -8,17 +8,15 @@ public class CashRegister {
 		Scanner keyboard = new Scanner(System.in);
 		float price = 0.0F;
 		float moneyTendered = 0.0F;
-		int bills = 0;
-		int cents = 0;
-		int coins[] = new int[4];
+		int changeTotal = 0;
 		
 		price = promptPrice(keyboard);
 		moneyTendered = promptMoneyTendered(keyboard);
 		if (validAmount(price, moneyTendered)) {
-			//bills = getDollars(price, moneyTendered);
-			cents = getCents(price, moneyTendered);
-			coins = centsToCoins(cents);
-			coinsToStrings(coins);
+			changeTotal = getChangeAmount(price, moneyTendered);
+			System.out.println(changeTotal);
+			
+			
 		}
 	}
 	
@@ -55,45 +53,68 @@ public class CashRegister {
 	}
 	
 	// get the number of bills that should be given to the customer.
-	static int getDollars(float price, float given) {
-		int change = (int)(given - price);
+	// TODO ***************************
+	// probably can do this entire thing with one giant modulo operation.
+	static int getChangeAmount(float price, float given) {
+		float change = (given-price) * 100.0F;
+		return (int)change;
+	}
+	
+	static int[] convertChange(int total) {
+		int change[] = new int[10];
+		int temp = total;
+		if (total >= 10000) {   // 100$ bill - change[0]
+			temp %= 10000;
+			change[0] = total/10000;
+			total = temp;
+		}
+		if (total >= 5000) { // $50 bill - change[1]
+			temp %= 5000;
+			change[1] = total/5000;
+			total = temp;
+		}
+		if (total >= 2000) { // $20 bill- change[2]
+			temp %= 2000;
+			change[2] = total/2000;
+			total = temp;
+		}
+		if (total >= 1000) { // $10 bill - change[3]
+			temp %= 1000;
+			change[3] = total/1000;
+			total = temp;
+		}
+		if (total >= 500) { // $5 bill - change[4]
+			temp %= 500;
+			change[4] = total/500;
+			total = temp;
+		}
+		if (total >= 100) { // $1 bill - change[5]
+			temp %= 100;
+			change[5] = total/100;
+			total = temp;
+		}
+		if (total >= 25) {
+			temp %= 25;       		// change[6]  quarters
+			change[6] = total/25;
+			total = temp;
+		}
+		if (total >= 10) {
+			temp %= 10;
+			change[7] = total/10; 	// change[7] dimes
+			total = temp;
+		}
+		if (total >= 5) { 
+			temp %= 5;
+			change[8] = total/5;   	// change[8]  nickels
+			total = temp;
+		}
+		if (total > 0) { 
+			change[9] = total; 		// change[9] pennies
+		}
 		return change;
 	}
 	
-	// display number of coins that should be given to the customer.
-	static int getCents(float price, float given) {
-		float change = (int)(given - price);
-		float changeDecimal = given - price;
-		float cents = changeDecimal - change;
-		cents *= 100;
-		return (int)cents;
-	}
-	
-	// put coins into array for string processing
-	static int[] centsToCoins(int cents) {
-		int coins[] = new int[4]; 
-		int temp = cents;
-		if (cents >= 25) {
-			temp %= 25;       		// coins[0]  quarters
-			coins[0] = cents/25;
-			cents = temp;
-		}
-		if (cents >= 10) {
-			temp %= 10;
-			coins[1] = cents/10; 	// coins[1] dimes
-			cents = temp;
-		}
-		if (cents >= 5) { 
-			temp %= 5;
-			coins[2] = cents/5;   	// coins[2]  nickels
-			cents = temp;
-		}
-		if (cents > 0) { 
-			coins[3] = cents; 		// coins[3] pennies
-		}
-		return coins;
-	}
-	
+	// *** TODO: modify this to changeToStrings, do total amounts.
 	// printout proper string including whether amounts are plural or singular
 	static void coinsToStrings(int coins[]) {
 		String Q; String D; String N; String P;
