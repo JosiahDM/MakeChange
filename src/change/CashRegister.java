@@ -106,7 +106,7 @@ public class CashRegister {
 		String quantities[] = { "hundred dollar bill", "fifty dollar bill", "twenty dollar bill", "ten dollar bill",
 				"five dollar bill", "one dollar bill", "quarter", "dime", "nickel", "pennies" };
 		// location of last element that has a value, this is so program
-		// knows where to put the period in output.
+		// knows where to put the period in output
 		int last = 9;
 		for (int i = change.length-1; i > 0; i--) {
 			if (change[i] == 0) {
