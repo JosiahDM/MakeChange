@@ -17,8 +17,9 @@ public class CashRegister {
 
 		while (running) {
 			// get price and money tendered from user
-			price = promptPrice(keyboard);
-			moneyTendered = promptMoneyTendered(keyboard);
+			price = prompt(keyboard, "**** Enter the price of the item in decimal form (ex: 5.89): ");
+			moneyTendered = prompt(keyboard, "**** Enter the money tendered in decimal form (ex: 10.25): ");
+			
 			if (validAmount(price, moneyTendered)) { // check if valid amounts
 				changeTotal = getChangeAmount(price, moneyTendered); // determine total change needed
 				unitQuantities = convertChange(changeTotal); // determine quantities of each unit needed
@@ -36,30 +37,17 @@ public class CashRegister {
 		}
 	}
 
-	// The user is prompted asking for the price of the item.
-	static float promptPrice(Scanner sc) {
-		float userPrice = 0.0F;
+	// prompt with String, ensure money values are positive
+	static float prompt(Scanner sc, String string) {
+		float result = 0.0F;
 		do {
-			System.out.print("**** Enter the price of the item in decimal form (ex: 5.89): ");
-			userPrice = sc.nextFloat();
-			if (userPrice <= 0) {
+			System.out.print(string);
+			result = sc.nextFloat();
+			if (result <= 0) {
 				System.out.println("Invalid input. Try again...");
 			}
-		} while (userPrice <= 0);
-		return userPrice;
-	}
-
-	// The user is prompted asking how much money was tendered by the customer.
-	static float promptMoneyTendered(Scanner sc) {
-		float tendered = 0.0F;
-		do {
-			System.out.print("**** Enter the money tendered in decimal form (ex: 10.25): ");
-			tendered = sc.nextFloat();
-			if (tendered <= 0) {
-				System.out.println("Invalid input. Try again...");
-			}
-		} while (tendered <= 0);
-		return tendered;
+		} while (result <= 0);
+		return result;
 	}
 
 	// Display an appropriate message if the customer provided 
@@ -116,7 +104,8 @@ public class CashRegister {
 			}
 		}
 		
-		// determine whether to make the quantities plural.
+		// determine whether to make the quantities plural, then print.
+		System.out.print("Result: ");
 		for (int i = 0; i < change.length; i++) {
 			if (change[i] > 1 && i != 9) {
 				quantities[i] += "s";
@@ -124,10 +113,6 @@ public class CashRegister {
 			if (i == 9 && change[i] == 1) {
 				quantities[9] = "penny";
 			}
-		}
-
-		System.out.print("Result: ");
-		for (int i = 0; i < change.length; i++) {
 			if (change[i] > 0 && i < last) {
 				System.out.print(change[i] + " " + quantities[i] + ", ");
 			} else if (change[i] > 0 && i == last) {
