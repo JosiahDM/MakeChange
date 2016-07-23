@@ -5,16 +5,16 @@ Makechange.java - a simple program to convert a change amount into it's correspo
 
 ####Directions:
 
-0. Compile and run CashRegister.java from the src/change directory.
+1. Compile and run CashRegister.java from the src/change directory.
 
 
-1. Follow the prompts:
+2. Follow the prompts:
 
-    1a. First prompt asks for price of item. Enter the price of the item to be purchased.
+    2a. First prompt asks for price of item. Enter the price of the item to be purchased.
 
-    1b. Second prompt asks for money tendered. Enter the amount of money given for payment.
+    2b. Second prompt asks for money tendered. Enter the amount of money given for payment.
 
 
-2. Read output.
+3. Read output.
 
-3. Press Y to run again. Any other key to quit.
+4. Press Y to run again. Any other key to quit.
