@@ -18,7 +18,7 @@ public class CashRegister {
 			
 			unitQuantities = convertChange(changeTotal);
 			
-			changeToStrings(unitQuantities);
+			changeToStrings(unitQuantities, changeTotal);
 		}
 	}
 	
@@ -117,70 +117,34 @@ public class CashRegister {
 	}
 	
 	// printout proper string including whether amounts are plural or singular
-	static void changeToStrings(int change[]) {
-		String hundred; String fifty; String twenty; String ten;
-		String five; String one; String Q; String D; String N; String P;
+	static void changeToStrings(int change[], int totalChange) {
+//		String hundred; String fifty; String twenty; String ten;
+//		String five; String one; String Q; String D; String N; String P;
+		String quantities[] = {
+				"hundred dollar bill", "fifty dollar bill", "twenty dollar bill", 
+				"ten dollar bill", "five dollar bill", "one dollar bill", "quarter", "dime", "nickel", "pennies"
+		};
+					
+		for (int i = 0; i < change.length; i++) {
+			if (change[i] > 1) {
+				quantities[i]+="s";
+				System.out.println(quantities[i] + " In if...");
+			} 
+			if (i == 9 && change[i] > 1) {
+				quantities[9] = "pennies";
+			}
+		}
 		
-		if (change[0] == 1) {
-			hundred = "hundred dollar bill";
-		} else {
-			hundred = "hundred dollar bills";
-		}
-		if (change[1] == 1) {
-			fifty = "fifty dollar bill";
-		} else {
-			fifty = "fifty dollar bills";
-		}
-		if (change[2] == 1) {
-			twenty = "twenty dollar bill";
-		} else {
-			twenty = "twenty dollar bills";
-		}
-		if (change[3] == 1) {
-			ten = "ten dollar bill";
-		} else {
-			ten = "ten dollar bills";
-		}
-		if (change[4] == 1) {
-			five = "five dollar bill";
-		} else {
-			five = "five dollar bills";
-		}
-		if (change[5] == 1) {
-			one = "dollar bill";
-		} else {
-			one = "dollar bills";
-		}
-		if (change[6] == 1) {
-			Q = "quarter";
-		} else {
-			Q = "quarters";
-		}
-		if (change[7] == 1) {
-			D = "dime";
-		} else {
-			D = "dimes";
-		} 
-		if (change[8] == 1) {
-			N = "nickel";
-		} else {
-			N = "nickels";
-		}
-		if (change[9] == 1) {
-			P = "penny";
-		} else {
-			P = "pennies";
-		}
-		System.out.print("Result: " + change[0] + " " + hundred + ", ");
-		System.out.print(change[1] + " " + fifty + ", ");
-		System.out.print(change[2] + " " + twenty + ", ");
-		System.out.print(change[3] + " " + ten + ", ");
-		System.out.print(change[4] + " " + five + ", ");
-		System.out.println(change[5] + " " + one + ", ");
-		System.out.print(change[6] + " " + Q + ", ");
-		System.out.print(change[7] + " " + D + ", ");
-		System.out.print(change[8] + " " + N + ", ");
-		System.out.print(change[9] + " " + P + ".");		
+		System.out.print("Result: " + change[0] + " " + quantities[0] + ", ");
+		System.out.print(change[1] + " " + quantities[1] + ", ");
+		System.out.print(change[2] + " " + quantities[2] + ", ");
+		System.out.print(change[3] + " " + quantities[3] + ", ");
+		System.out.print(change[4] + " " + quantities[4] + ", ");
+		System.out.println(change[5] + " " + quantities[5] + ", ");
+		System.out.print(change[6] + " " + quantities[6] + ", ");
+		System.out.print(change[7] + " " + quantities[7] + ", ");
+		System.out.print(change[8] + " " + quantities[8] + ", ");
+		System.out.println(change[9] + " " + quantities[9] + ".");		
 	}
 	
 	
