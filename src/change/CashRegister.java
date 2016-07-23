@@ -65,53 +65,16 @@ public class CashRegister {
 	static int[] convertChange(int total) {
 		int change[] = new int[10];
 		int temp = total;
-		if (total >= 10000) {   // 100$ bill - change[0]
-			temp %= 10000;
-			change[0] = total/10000;
-			total = temp;
-		}
-		if (total >= 5000) { // $50 bill - change[1]
-			temp %= 5000;
-			change[1] = total/5000;
-			total = temp;
-		}
-		if (total >= 2000) { // $20 bill- change[2]
-			temp %= 2000;
-			change[2] = total/2000;
-			total = temp;
-		}
-		if (total >= 1000) { // $10 bill - change[3]
-			temp %= 1000;
-			change[3] = total/1000;
-			total = temp;
-		}
-		if (total >= 500) { // $5 bill - change[4]
-			temp %= 500;
-			change[4] = total/500;
-			total = temp;
-		}
-		if (total >= 100) { // $1 bill - change[5]
-			temp %= 100;
-			change[5] = total/100;
-			total = temp;
-		}
-		if (total >= 25) {
-			temp %= 25;       		// change[6]  quarters
-			change[6] = total/25;
-			total = temp;
-		}
-		if (total >= 10) {
-			temp %= 10;
-			change[7] = total/10; 	// change[7] dimes
-			total = temp;
-		}
-		if (total >= 5) { 
-			temp %= 5;
-			change[8] = total/5;   	// change[8]  nickels
-			total = temp;
-		}
-		if (total > 0) { 
-			change[9] = total; 		// change[9] pennies
+		int values[] = {10000, 5000, 2000, 1000, 500, 100, 25, 10, 5, 1};
+		
+		// loop through the values in array, modulo the change to respective values,
+		// assign those values to the returning array
+		for (int i = 0; i < values.length; i++) {
+			if (total >= values[i]) {
+				temp %= values[i];
+				change[i] = total/values[i];
+				total = temp;
+			}
 		}
 		return change;
 	}
