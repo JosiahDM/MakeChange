@@ -9,14 +9,16 @@ public class CashRegister {
 		float price = 0.0F;
 		float moneyTendered = 0.0F;
 		int changeTotal = 0;
+		int unitQuantities[] = new int[10];
 		
 		price = promptPrice(keyboard);
 		moneyTendered = promptMoneyTendered(keyboard);
 		if (validAmount(price, moneyTendered)) {
 			changeTotal = getChangeAmount(price, moneyTendered);
-			System.out.println(changeTotal);
 			
+			unitQuantities = convertChange(changeTotal);
 			
+			changeToStrings(unitQuantities);
 		}
 	}
 	
@@ -53,13 +55,13 @@ public class CashRegister {
 	}
 	
 	// get the number of bills that should be given to the customer.
-	// TODO ***************************
-	// probably can do this entire thing with one giant modulo operation.
 	static int getChangeAmount(float price, float given) {
-		float change = (given-price) * 100.0F;
-		return (int)change;
+		double change = (given-price) * 100.0;
+		return (int)(Math.ceil(change));
 	}
 	
+	// Modulo the total amount of change into each separate unit quantity, represented by
+	// a specific place in the array change[]
 	static int[] convertChange(int total) {
 		int change[] = new int[10];
 		int temp = total;
@@ -114,34 +116,71 @@ public class CashRegister {
 		return change;
 	}
 	
-	// *** TODO: modify this to changeToStrings, do total amounts.
 	// printout proper string including whether amounts are plural or singular
-	static void coinsToStrings(int coins[]) {
-		String Q; String D; String N; String P;
-		if (coins[0] == 1) {
+	static void changeToStrings(int change[]) {
+		String hundred; String fifty; String twenty; String ten;
+		String five; String one; String Q; String D; String N; String P;
+		
+		if (change[0] == 1) {
+			hundred = "hundred dollar bill";
+		} else {
+			hundred = "hundred dollar bills";
+		}
+		if (change[1] == 1) {
+			fifty = "fifty dollar bill";
+		} else {
+			fifty = "fifty dollar bills";
+		}
+		if (change[2] == 1) {
+			twenty = "twenty dollar bill";
+		} else {
+			twenty = "twenty dollar bills";
+		}
+		if (change[3] == 1) {
+			ten = "ten dollar bill";
+		} else {
+			ten = "ten dollar bills";
+		}
+		if (change[4] == 1) {
+			five = "five dollar bill";
+		} else {
+			five = "five dollar bills";
+		}
+		if (change[5] == 1) {
+			one = "dollar bill";
+		} else {
+			one = "dollar bills";
+		}
+		if (change[6] == 1) {
 			Q = "quarter";
 		} else {
 			Q = "quarters";
 		}
-		if (coins[1] == 1) {
+		if (change[7] == 1) {
 			D = "dime";
 		} else {
 			D = "dimes";
 		} 
-		if (coins[2] == 1) {
+		if (change[8] == 1) {
 			N = "nickel";
 		} else {
 			N = "nickels";
 		}
-		if (coins[3] == 1) {
+		if (change[9] == 1) {
 			P = "penny";
 		} else {
 			P = "pennies";
 		}
-		System.out.print("Result: " + coins[0] + " " + Q + ", ");
-		System.out.print(coins[1] + " " + D + ", ");
-		System.out.print(coins[2] + " " + N + ", ");
-		System.out.println(coins[3] + " " + P + ".");
+		System.out.print("Result: " + change[0] + " " + hundred + ", ");
+		System.out.print(change[1] + " " + fifty + ", ");
+		System.out.print(change[2] + " " + twenty + ", ");
+		System.out.print(change[3] + " " + ten + ", ");
+		System.out.print(change[4] + " " + five + ", ");
+		System.out.println(change[5] + " " + one + ", ");
+		System.out.print(change[6] + " " + Q + ", ");
+		System.out.print(change[7] + " " + D + ", ");
+		System.out.print(change[8] + " " + N + ", ");
+		System.out.print(change[9] + " " + P + ".");		
 	}
 	
 	
