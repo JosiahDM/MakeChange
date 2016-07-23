@@ -57,7 +57,7 @@ public class CashRegister {
 	// get the number of bills that should be given to the customer.
 	static int getChangeAmount(float price, float given) {
 		double change = (given-price) * 100.0;
-		return (int)(Math.ceil(change));
+		return (int)(Math.round(change));
 	}
 	
 	// Modulo the total amount of change into each separate unit quantity, represented by
@@ -118,33 +118,30 @@ public class CashRegister {
 	
 	// printout proper string including whether amounts are plural or singular
 	static void changeToStrings(int change[], int totalChange) {
-//		String hundred; String fifty; String twenty; String ten;
-//		String five; String one; String Q; String D; String N; String P;
 		String quantities[] = {
 				"hundred dollar bill", "fifty dollar bill", "twenty dollar bill", 
 				"ten dollar bill", "five dollar bill", "one dollar bill", "quarter", "dime", "nickel", "pennies"
 		};
-					
+		
+		// determine whether to make the quantities plural.
 		for (int i = 0; i < change.length; i++) {
 			if (change[i] > 1) {
 				quantities[i]+="s";
-				System.out.println(quantities[i] + " In if...");
 			} 
-			if (i == 9 && change[i] > 1) {
-				quantities[9] = "pennies";
+			if (i == 9 && change[i] == 1) {
+				quantities[9] = "penny";
 			}
 		}
 		
-		System.out.print("Result: " + change[0] + " " + quantities[0] + ", ");
-		System.out.print(change[1] + " " + quantities[1] + ", ");
-		System.out.print(change[2] + " " + quantities[2] + ", ");
-		System.out.print(change[3] + " " + quantities[3] + ", ");
-		System.out.print(change[4] + " " + quantities[4] + ", ");
-		System.out.println(change[5] + " " + quantities[5] + ", ");
-		System.out.print(change[6] + " " + quantities[6] + ", ");
-		System.out.print(change[7] + " " + quantities[7] + ", ");
-		System.out.print(change[8] + " " + quantities[8] + ", ");
-		System.out.println(change[9] + " " + quantities[9] + ".");		
+		System.out.print("Result: ");
+		for (int i = 0; i < change.length; i++) {
+			if (change[i] > 0 && i != 9) {
+				System.out.print(change[i] + " " + quantities[i] + ", ");
+			}
+			if(i == 9) {
+				System.out.println(change[i] + " " + quantities[i] + ".");
+			}
+		}	
 	}
 	
 	
